@@ -1,0 +1,36 @@
+{
+  "name": "mice-cimp",
+  "version": "1.0.0",
+  "description": "estimate import expenses in mice",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mx-Wolf/mice-cimp.git"
+  },
+  "keywords": [
+    "mice",
+    "calc",
+    "customs",
+    "vat",
+    "НДС",
+    "transport",
+    "bank fee"
+  ],
+  "author": "Maxim Volkov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mx-Wolf/mice-cimp/issues"
+  },
+  "homepage": "https://github.com/Mx-Wolf/mice-cimp#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.4",
+    "typescript": "^4.3.5"
+  }
+}

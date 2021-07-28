@@ -1,0 +1,1 @@
+export const helper = () => { throw new Error(); }
