@@ -1,8 +1,9 @@
+import { CalcImpServices } from "./services";
 
 export interface CalcImportProps {
 
   // Стоимость по инвойсу
-  ImpInvoceToBePaid: number;
+  impInvoceToBePaid: number;
   currency: string;
   // КУРС:
   currencyRate: number;
@@ -17,7 +18,9 @@ export interface CalcImportProps {
   // Транспорт Завод-Пост
   impDelivery: number;
   // Транспорт Пост-Склад
+  domDelivery: number;
   // Страховка
+  impInsuranceRate?: number | undefined;
   impInsurance: number;
   // Таможенные сборы
   impCustomsFee: number;
@@ -33,11 +36,10 @@ export interface CalcImportProps {
   // оформление ГТД
   impCustomsDeclaration: number;
   // ДС и сертификаты
+  impDsCertificates: number;
   // Вознагр. за орг.перевозки
   impCustomsClearance: number;
-  // Разница НДС к уплате
   // ИТОГО РАСХОДЫ:
-  // Налог на Прибыль СТ
   // Наценка СаенсТехнолоджи 
   agentAmount: number;
   // Наценка СТ в %
@@ -46,9 +48,34 @@ export interface CalcImportProps {
   payAgentMin: number;
   // Сумма спецификации СТ>ПТС
   payAgentPlan: number;
+  // Разница НДС к уплате
+  payAgentNDS: number;
+  // Налог на Прибыль СТ
+  agentIncomeTax: number;
+  agentExpensesWoNDS: number;
+  agentIncomeWoNDS: number;
   // ИТОГО ЗАТРАТЫ ДЛЯ ПТС:
   agentFee: number;
   // ЗАТРАТЫ В %:
   agentFeeRate: number;
-
 }
+
+export type CalcImportRequestProps = Pick<CalcImportProps,
+  "payAgentPlan" |
+  "impInvoceToBePaid" |
+  "currencyRate" |
+  "domDelivery" |
+  "impDelivery" |
+  "impCustomsDutyRate" |
+  "impDsCertificates" |
+  "agentRate" |
+  "impInsuranceRate" |
+  "currency">;
+export interface ValidationDetails {
+  status?: string | undefined;
+  errors: Partial<Record<keyof CalcImportProps, string>>;
+}
+export interface CalcDetails extends ValidationDetails {
+  results: CalcImportProps;
+}
+export type CalcImport = (props: CalcImportRequestProps, services: CalcImpServices) => CalcDetails;
