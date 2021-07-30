@@ -4,9 +4,10 @@ export interface Value {
 }
 export interface CalcImpServices {
   changeCurrency: (from: Value, to: string) => Value;
-  getBankCurrencyExchangeFee: (target: Value) => Value;
-  getBankComplianceFee: () => Value;
-  getBankWireTransferFee: (target: Value) => Value;
+  currencyRate: (currency: string) => number;
+  getBankCurrencyExchangeFee: (target: Value) => number;
+  getBankComplianceFee: (target: Value) => number;
+  getBankWireTransferFee: (target: Value) => number;
   getImpInsuranceRate: () => number;
   getAgentRate: () => number;
   getImpCustomsFee: (value: number) => number;

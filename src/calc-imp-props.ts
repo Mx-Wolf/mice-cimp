@@ -74,9 +74,10 @@ export type CalcImportRequestProps = Partial<Pick<CalcImportProps,
   "impInvoceToBePaid" |
   "payAgentPlan"
 >>;
+export type ErrorRecord = Partial<Record<keyof CalcImportProps, string>>;
 export interface ValidationDetails {
   status?: string | undefined;
-  errors: Partial<Record<keyof CalcImportProps, string>>;
+  errors: ErrorRecord;
 }
 export interface CalcDetails extends ValidationDetails {
   results: Partial<CalcImportProps>;
