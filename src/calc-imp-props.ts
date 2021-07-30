@@ -1,15 +1,16 @@
 import { CalcImpServices } from "./services";
 
 export interface CalcImportProps {
-
-  // Стоимость по инвойсу
+  
+  /** Стоимость по инвойсу, Оплата инвойса*/
   impInvoceToBePaid: number;
   currency: string;
-  // КУРС:
+  
+  /** КУРС:*/
   currencyRate: number;
   // Вариант новый:
-  // Оплата инвойса
-  // Комиссия покуп. Валюты
+  
+  /**  Комиссия покуп. Валюты*/
   bankCurrencyExchangeFee: number;
   // Комиссия за вал. Контр.
   bankComplianceFee: number;
@@ -42,7 +43,7 @@ export interface CalcImportProps {
   // ИТОГО РАСХОДЫ:
   // Наценка СаенсТехнолоджи 
   agentAmount: number;
-  // Наценка СТ в %
+  /** Наценка СТ в % */
   agentRate: number;
   // Нужно заплатить с ПТС min:
   payAgentMin: number;
@@ -54,23 +55,24 @@ export interface CalcImportProps {
   agentIncomeTax: number;
   agentExpensesWoNDS: number;
   agentIncomeWoNDS: number;
-  // ИТОГО ЗАТРАТЫ ДЛЯ ПТС:
+  /** ИТОГО ЗАТРАТЫ ДЛЯ ПТС: C26*/
   agentFee: number;
   // ЗАТРАТЫ В %:
   agentFeeRate: number;
 }
 
-export type CalcImportRequestProps = Pick<CalcImportProps,
-  "payAgentPlan" |
-  "impInvoceToBePaid" |
+export type CalcImportRequestProps = Partial<Pick<CalcImportProps,
+  "agentRate" |
+  "currency" |
   "currencyRate" |
   "domDelivery" |
-  "impDelivery" |
   "impCustomsDutyRate" |
+  "impDelivery" |
   "impDsCertificates" |
-  "agentRate" |
   "impInsuranceRate" |
-  "currency">;
+  "impInvoceToBePaid" |
+  "payAgentPlan"
+>>;
 export interface ValidationDetails {
   status?: string | undefined;
   errors: Partial<Record<keyof CalcImportProps, string>>;
@@ -79,3 +81,4 @@ export interface CalcDetails extends ValidationDetails {
   results: CalcImportProps;
 }
 export type CalcImport = (props: CalcImportRequestProps, services: CalcImpServices) => CalcDetails;
+export type AgentFeeResult = ValidationDetails & {results: Omit<CalcImportProps,"agentFeeRate">};
