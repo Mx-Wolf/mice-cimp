@@ -12,7 +12,7 @@ export const calcAgentFee = (props: CalcDetails, services: CalcImpServices): Cal
       status,
       results: {
         ...results,
-        agentFee: getAgentFee(results, props.results),
+        agentFee: getAgentFee(results),
       }
     }
   } catch (err) {
