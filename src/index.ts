@@ -4,13 +4,23 @@ import { calcAgentFee } from "./calc-agent-fee";
 import { getAgentFeeRate } from "./get-agent-fee-rate"
 
 export const calcImport = (props: CalcDetails, services: CalcImpServices): CalcDetails => {
-  const { errors, status, results } = calcAgentFee(props, services);
-  return {
-    errors,
-    status,
-    results: {
-      ...results,
-      agentFeeRate: getAgentFeeRate(results, props.results)
+  try {
+    const { errors, status, results } = calcAgentFee(props, services);
+    return {
+      errors,
+      status,
+      results: {
+        ...results,
+        agentFeeRate: getAgentFeeRate(results)
+      }
+    }
+  } catch (err) {
+    return {
+      ...props,
+      errors: {
+        ...props.errors,
+        agentFeeRate: err.message,
+      }
     }
   }
 
