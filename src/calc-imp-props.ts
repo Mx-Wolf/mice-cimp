@@ -45,7 +45,8 @@ export interface CalcImportProps {
   agentAmount: number;
   /** Наценка СТ в % */
   agentRate: number;
-  // Нужно заплатить с ПТС min:
+  
+  /** Нужно заплатить с ПТС min:*/
   payAgentMin: number;
   // Сумма спецификации СТ>ПТС
   payAgentPlan: number;
@@ -78,7 +79,8 @@ export interface ValidationDetails {
   errors: Partial<Record<keyof CalcImportProps, string>>;
 }
 export interface CalcDetails extends ValidationDetails {
-  results: CalcImportProps;
+  results: Partial<CalcImportProps>;
 }
 export type CalcImport = (props: CalcImportRequestProps, services: CalcImpServices) => CalcDetails;
 export type AgentFeeResult = ValidationDetails & {results: Omit<CalcImportProps,"agentFeeRate">};
+export type PayAgentMinResult = ValidationDetails & {results: Omit<AgentFeeResult["results"], "agentFee">};

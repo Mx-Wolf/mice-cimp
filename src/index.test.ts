@@ -1,7 +1,7 @@
 import { calcAgentFee } from "./calc-agent-fee";
 import { getAgentFeeRate } from "./get-agent-fee-rate";
 import { calcImport } from "./index";
-import { CalcImportRequestProps } from "./calc-imp-props";
+import { CalcDetails } from "./calc-imp-props";
 import { CalcImpServices } from "./services";
 
 
@@ -11,7 +11,7 @@ jest.mock("./get-agent-fee-rate", () => ({ getAgentFeeRate: jest.fn() }))
 beforeEach(() => jest.resetAllMocks());
 describe("main interface for the algo", () => {
   it("runs", () => {
-    const props: CalcImportRequestProps = {};
+    const props: CalcDetails = <CalcDetails> {};
     const services: CalcImpServices = <CalcImpServices>{};
     (<jest.Mock>calcAgentFee).mockReturnValue({});
     (<jest.Mock>getAgentFeeRate).mockReturnValueOnce(42);

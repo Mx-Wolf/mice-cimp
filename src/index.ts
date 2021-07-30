@@ -1,16 +1,16 @@
-import { CalcImportRequestProps, CalcImport, CalcDetails, CalcImportProps, ValidationDetails } from "./calc-imp-props";
+import { CalcDetails } from "./calc-imp-props";
 import { CalcImpServices } from "./services";
 import { calcAgentFee } from "./calc-agent-fee";
 import { getAgentFeeRate } from "./get-agent-fee-rate"
 
-export const calcImport: CalcImport = (props: CalcImportRequestProps, services: CalcImpServices): CalcDetails => {
+export const calcImport = (props: CalcDetails, services: CalcImpServices): CalcDetails => {
   const { errors, status, results } = calcAgentFee(props, services);
   return {
     errors,
     status,
     results: {
       ...results,
-      agentFeeRate: getAgentFeeRate(results, props)
+      agentFeeRate: getAgentFeeRate(results, props.results)
     }
   }
 
