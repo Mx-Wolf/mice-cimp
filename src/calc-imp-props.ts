@@ -1,65 +1,83 @@
 import { CalcImpServices } from "./services";
 
 export interface CalcImportProps {
-  
-  /** Стоимость по инвойсу, Оплата инвойса*/
+
+  /** Стоимость по инвойсу, Оплата инвойса c02*/
   impInvoceToBePaid: number;
   currency: string;
-  
+
   /** КУРС:*/
   currencyRate: number;
   // Вариант новый:
-  
-  /**  Комиссия покуп. Валюты*/
+
+  /**  Комиссия покуп. Валюты c07*/
   bankCurrencyExchangeFee: number;
-  // Комиссия за вал. Контр.
+  /**Комиссия за вал. Контр. c08*/
   bankComplianceFee: number;
-  // Комиссия за перевод
+  /**Комиссия за перевод c09*/
   bankWireTransferFee: number;
-  // Транспорт Завод-Пост
+  /**Транспорт Завод-Пост c10*/
   impDelivery: number;
-  // Транспорт Пост-Склад
+  /**Транспорт Пост-Склад c11*/
   domDelivery: number;
-  // Страховка
+  /** ставка Страховка*/
   impInsuranceRate?: number | undefined;
+  /** Страховка с12 */
   impInsurance: number;
-  // Таможенные сборы
+  /**Таможенные сборы c13*/
   impCustomsFee: number;
-  // Таможенная пошлина
+  /**ставка Таможенная пошлина*/
   impCustomsDutyRate: number;
+  /** Таможенная пошлина с14*/
   impCustomsDuty: number;
+  /** Таможенная стоимость со сборами */
   impCustomsAmount: number;
-  // Оплата НДС на таможне
+  /** ставка НДС на таможне*/
   impCustomsNDSRate: number;
+  /** сумма для вычисления НДС */
+  impCustomsNDSBase: number;
+  /**Ндс на таможне */
   impCustomsNDS: number;
-  // свх (хранение)
+  /**свх (хранение) c16*/
   impBondedStorageFee: number
-  // оформление ГТД
+  /**оформление ГТД c17 */
   impCustomsDeclaration: number;
-  // ДС и сертификаты
+  /**ДС и сертификаты c18*/
   impDsCertificates: number;
-  // Вознагр. за орг.перевозки
-  impCustomsClearance: number;
+  /** Вознагр. за орг.перевозки c19*/
+  impCompensation: number;
   // ИТОГО РАСХОДЫ:
-  // Наценка СаенсТехнолоджи 
+  /**Наценка СаенсТехнолоджи C23 */
   agentAmount: number;
-  /** Наценка СТ в % */
+  /** Наценка СТ в % c24*/
   agentRate: number;
-  
+
   /** Нужно заплатить с ПТС min:*/
-  payAgentMin: number;
-  // Сумма спецификации СТ>ПТС
-  payAgentPlan: number;
-  // Разница НДС к уплате
-  payAgentNDS: number;
-  // Налог на Прибыль СТ
+  agentPayMin: number;
+  /**Сумма спецификации СТ>ПТС*/
+  agentPayPlan: number;
+  /**Ставка НДС для агента h17_0*/
+  agentPayPlanNDSRate: number;
+  /**НДС к уплате H17 */
+  agentPayPlanNDS: number;
+
+  /**Разница НДС к уплате*/
+  diffNDS: number;
+  /**Ставка налога на прибыль агента */
+  agentIncomeTaxRate: number;
+  /**Налог на Прибыль СТ: C22*/
   agentIncomeTax: number;
+  agentIncomeTaxMin: number;
+  /** Затраты до НДС H21*/
   agentExpensesWoNDS: number;
+  /** Продажа до НДС H20*/
   agentIncomeWoNDS: number;
   /** ИТОГО ЗАТРАТЫ ДЛЯ ПТС: C26*/
-  agentFee: number;
-  // ЗАТРАТЫ В %:
-  agentFeeRate: number;
+  projectPrincipalExpenses: number;
+  /**ЗАТРАТЫ В %: C27*/
+  projectOverhead: number;
+  /**ИТОГО РАСХОДЫ: C21*/
+  projectExpenses: number;
 }
 
 export type CalcImportRequestProps = Partial<Pick<CalcImportProps,
@@ -72,7 +90,7 @@ export type CalcImportRequestProps = Partial<Pick<CalcImportProps,
   "impDsCertificates" |
   "impInsuranceRate" |
   "impInvoceToBePaid" |
-  "payAgentPlan"
+  "agentPayPlan"
 >>;
 export type ErrorRecord = Partial<Record<keyof CalcImportProps, string>>;
 export interface ValidationDetails {
@@ -83,5 +101,5 @@ export interface CalcDetails extends ValidationDetails {
   results: Partial<CalcImportProps>;
 }
 export type CalcImport = (props: CalcImportRequestProps, services: CalcImpServices) => CalcDetails;
-export type AgentFeeResult = ValidationDetails & {results: Omit<CalcImportProps,"agentFeeRate">};
-export type PayAgentMinResult = ValidationDetails & {results: Omit<AgentFeeResult["results"], "agentFee">};
+export type AgentFeeResult = ValidationDetails & { results: Omit<CalcImportProps, "agentFeeRate"> };
+export type PayAgentMinResult = ValidationDetails & { results: Omit<AgentFeeResult["results"], "agentFee"> };
