@@ -52,9 +52,9 @@ export interface CalcImportProps {
   /** Наценка СТ в % c24*/
   agentRate: number;
 
-  /** Нужно заплатить с ПТС min:*/
+  /** Нужно заплатить с ПТС min: c25*/
   agentPayMin: number;
-  /**Сумма спецификации СТ>ПТС*/
+  /**Сумма спецификации СТ>ПТС c01 */
   agentPayPlan: number;
   /**Ставка НДС для агента h17_0*/
   agentPayPlanNDSRate: number;
