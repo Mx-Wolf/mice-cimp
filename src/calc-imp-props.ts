@@ -103,3 +103,19 @@ export interface CalcDetails extends ValidationDetails {
 export type CalcImport = (props: CalcImportRequestProps, services: CalcImpServices) => CalcDetails;
 export type AgentFeeResult = ValidationDetails & { results: Omit<CalcImportProps, "agentFeeRate"> };
 export type PayAgentMinResult = ValidationDetails & { results: Omit<AgentFeeResult["results"], "agentFee"> };
+
+export type FieldNames = 
+"Стоимость по инвойсу" |
+"Курс" |
+"Транспорт Завод-Пост" |
+"Транспорт Пост-Склад" |
+"СВХ (хранение)" |
+"Вознагр. за орг.перевозки" |
+"ДС и сертификаты" |
+"Наценка СТ" |
+"Ставка НДС" |
+"Ставка Страховка" |
+"Ставка Таможенные сборы" |
+"Ставка Таможенная пошлина" |
+"Ставка Налог на прибыль";
+
