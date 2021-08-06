@@ -13,12 +13,12 @@ export const BONDED_STORAGE_CURRENCY = BASE_CURRENCY;
 export const COMPENSATION_AMOUNT = 3500;
 export const COMPENSATION_CURRENCY = BASE_CURRENCY;
 
-interface SettingItem {
+export interface SettingItem {
   unit: "RUB" | "CUR" | "FRAC";
   value: number;
 }
 
-export const DefaultSettingsFx: Partial<Record<FieldNames, SettingItem>> = {
+export const defaultSettingsFx: Partial<Record<FieldNames, SettingItem>> = {
   "Вознагр. за орг.перевозки": { unit: "RUB", value: 3500 },
   "ДС и сертификаты": { unit: "RUB", value: 0 },
   "Наценка СТ": { unit: "FRAC", value: 0.02 },
