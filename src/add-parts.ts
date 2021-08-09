@@ -1,0 +1,1 @@
+export const sum = (parts: Array<number | undefined>) => parts.reduce((a: number, b) => a + (b || 0), 0);

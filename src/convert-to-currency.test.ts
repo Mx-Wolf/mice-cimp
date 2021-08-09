@@ -7,7 +7,7 @@ const VALUE_IN_SETTINGS = 42;
 const VALUE_WHEN_DEFAULT = 97;
 describe("извлечение данных в нужной валюте из настроек по умолчанию", () => {
   const services: Pick<CalcImpServices, "changeCurrency"> = {
-    changeCurrency: (from: Value, to: string) => VALUE_FROM_CHANGE_CURRENCY,
+    changeCurrency: (from: Partial<Value>, to: string) => VALUE_FROM_CHANGE_CURRENCY,
   };
   describe("когда настройка в валюте", () => {
     const defaultSettingsFx: Partial<Record<FieldNames, SettingItem>> = {
@@ -18,21 +18,21 @@ describe("извлечение данных в нужной валюте из н
       expect(a).toBe(VALUE_IN_SETTINGS);
     });
   });
-  describe("когда настройки в долях",()=>{
+  describe("когда настройки в долях", () => {
     const defaultSettingsFx: Partial<Record<FieldNames, SettingItem>> = {
       "Вознагр. за орг.перевозки": { unit: "FRAC", value: VALUE_IN_SETTINGS },
     };
-    it("возвращает как есть",()=>{
+    it("возвращает как есть", () => {
       const { "Вознагр. за орг.перевозки": a = VALUE_WHEN_DEFAULT } = convertSettingsToCurrency(defaultSettingsFx, "", services);
       expect(a).toBe(VALUE_IN_SETTINGS);
     });
   });
-  describe("когда настройки в рублях",()=>{
+  describe("когда настройки в рублях", () => {
 
     const defaultSettingsFx: Partial<Record<FieldNames, SettingItem>> = {
       "Вознагр. за орг.перевозки": { unit: "RUB", value: VALUE_IN_SETTINGS },
-    };    
-    it("возвращает результат конвертации",()=>{
+    };
+    it("возвращает результат конвертации", () => {
       const { "Вознагр. за орг.перевозки": a = VALUE_WHEN_DEFAULT } = convertSettingsToCurrency(defaultSettingsFx, "", services);
       expect(a).toBe(VALUE_FROM_CHANGE_CURRENCY);
     })

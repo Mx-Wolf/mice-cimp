@@ -3,11 +3,11 @@ export interface Value {
   amount: number;
 }
 export interface CalcImpServices {
-  changeCurrency: (from: Value, to: string) => number;
+  changeCurrency: (from: Partial<Value>, to: string) => number;
   currencyRate: (currency: string) => number;
-  getBankCurrencyExchangeFee: (target: Value) => number;
-  getBankComplianceFee: (target: Value) => number;
-  getBankWireTransferFee: (target: Value) => number;
+  getBankCurrencyExchangeFee: (target: Partial<Value>) => Value;
+  getBankComplianceFee: (target: Partial<Value>) => Value;
+  getBankWireTransferFee: (target: Partial<Value>) => Value;
   getImpInsuranceRate: () => number;
   getAgentRate: () => number;
   getImpCustomsFee: (target:Value) => number;
